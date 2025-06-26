@@ -1,0 +1,20 @@
+# Node modules (backend + frontend)
+backend/node_modules/
+frontend/node_modules/
+
+# Environment files
+backend/.env
+frontend/.env  # if you ever use one in Angular
+
+# Logs
+*.log
+
+# Angular build output
+frontend/dist/
+
+# OS & IDE junk
+.DS_Store
+.env
+*.swp
+*.swo
+.vscode/
