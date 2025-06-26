@@ -1,10 +1,10 @@
 # Node modules (backend + frontend)
 backend/node_modules/
-frontend/node_modules/
+realtime-notification-frontend/node_modules/
 
 # Environment files
 backend/.env
-frontend/.env  # if you ever use one in Angular
+frontend/.env
 
 # Logs
 *.log
