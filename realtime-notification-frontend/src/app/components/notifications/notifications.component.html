@@ -1,5 +1,15 @@
-<h2>Real-Time Notifications</h2>
+<div class="notifications-wrapper">
+  <h2>🔔 Real-Time Notifications</h2>
 
-<ul>
-  <li *ngFor="let message of messages">🔔 {{ message }}</li>
-</ul>
+  <ul *ngIf="messages.length; else emptyState">
+    <li *ngFor="let message of messages" class="notification-item">
+      <span class="icon">🔔</span>
+      <span class="message">{{ message }}</span>
+      <span class="timestamp">{{ getCurrentTime() }}</span>
+    </li>
+  </ul>
+
+  <ng-template #emptyState>
+    <p class="empty">No notifications yet.</p>
+  </ng-template>
+</div>

@@ -44,6 +44,9 @@ io.on("connection", (socket) => {
   });
 });
 
+// Set Socket.IO instance on the Express app so it can be accessed in routes/controllers
+app.set("io", io);
+
 // Start the HTTP server and listen on the defined port
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

@@ -9,7 +9,7 @@ const cors = require("cors");
 const app = express();
 
 // Use built-in middleware to parse JSON request bodies
-app.use(express.json);
+app.use(express.json());
 
 // Enable CORS for frontend origin (e.g., Angular running on port 4200)
 app.use(
@@ -19,10 +19,9 @@ app.use(
   })
 );
 
-// Example basic route to test the API is working
-app.get("/api/health", (req, res) => {
-  res.json({ message: "Backend is running!" });
-});
+const notificationRoutes = require("./routes/notificationRoutes");
+// Mount the route
+app.use("/api", notificationRoutes);
 
 // Export the configured app so it can be used in server.js
 module.exports = app;

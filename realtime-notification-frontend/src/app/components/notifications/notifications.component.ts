@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 export class NotificationsComponent implements OnInit, OnDestroy {
   messages: string[] = [];
   private welcomeSub!: Subscription;
+  private notificationSub!: Subscription;
 
   constructor(private socketService: WebSocketService) {}
 
@@ -26,6 +27,20 @@ export class NotificationsComponent implements OnInit, OnDestroy {
       .subscribe((message) => {
         this.messages.push(message);
       });
+
+    // ✅ Listen for real notifications triggered from the backend
+    this.notificationSub = this.socketService
+      .listen<string>('notification')
+      .subscribe((message) => {
+        console.log('Received notification from server: ', message); // ✅ Log here
+
+        this.messages.push(message);
+      });
+  }
+
+  getCurrentTime(): string {
+    const now = new Date();
+    return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   }
 
   ngOnDestroy(): void {
@@ -33,5 +48,6 @@ export class NotificationsComponent implements OnInit, OnDestroy {
     if (this.welcomeSub) {
       this.welcomeSub.unsubscribe();
     }
+    if (this.notificationSub) this.notificationSub.unsubscribe();
   }
 }
