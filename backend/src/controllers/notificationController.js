@@ -2,7 +2,6 @@
 // @route   POST /api/notify
 // @access  Public (you can protect later with middleware)
 exports.sendNotification = (req, res) => {
-  console.log("POST /api/notify hit");
   const { message } = req.body;
 
   if (!message) {
@@ -11,10 +10,13 @@ exports.sendNotification = (req, res) => {
 
   const io = req.app.get("io"); // Access Socket.IO instance
 
-  console.log("Broadcasting notification:", message); // ✅ Add this line
+  const payload = {
+    message,
+    timestamp: new Date().toISOString(), // Use ISO string for consistent parsing
+  };
 
   // Emit the notification to all connected clients
-  io.emit("notification", message);
+  io.emit("notification", payload); // Emit an object now
 
   res.status(200).json({ success: true, message: "Notification sent" });
 };

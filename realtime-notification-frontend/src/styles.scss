@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+/* Global body layout fix */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #eef1f5;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  min-height: 100vh;
+}
+
+/* This centers the root Angular app */
+app-root {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

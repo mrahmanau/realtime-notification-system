@@ -1,15 +1,17 @@
-<div class="notifications-wrapper">
-  <h2>🔔 Real-Time Notifications</h2>
-
-  <ul *ngIf="messages.length; else emptyState">
-    <li *ngFor="let message of messages" class="notification-item">
-      <span class="icon">🔔</span>
-      <span class="message">{{ message }}</span>
-      <span class="timestamp">{{ getCurrentTime() }}</span>
-    </li>
-  </ul>
-
-  <ng-template #emptyState>
-    <p class="empty">No notifications yet.</p>
-  </ng-template>
+<div class="notification-header" (click)="markAllAsRead()">
+  <span class="bell">🔔</span>
+  <span class="title">Notifications</span>
+  <span class="badge" *ngIf="unreadCount > 0">{{ unreadCount }}</span>
 </div>
+
+<ul *ngIf="messages.length; else emptyState">
+  <li *ngFor="let item of messages" class="notification-item">
+    <span class="icon">🔔</span>
+    <span class="message">{{ item.message }}</span>
+    <span class="timestamp">{{ formatTime(item.timestamp) }}</span>
+  </li>
+</ul>
+
+<ng-template #emptyState>
+  <p class="empty">No notifications yet.</p>
+</ng-template>
